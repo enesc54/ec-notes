@@ -31,9 +31,9 @@ function Login() {
     const loginClick = async () => {
         try {
             const user = { email, password };
-            const data = await loginUser(user);
+            const response = await loginUser(user);
 
-            localStorage.setObject("currentUser", data);
+            localStorage.setObject("currentUser", response.data);
 
             navigate("/notes");
         } catch (e) {

@@ -32,9 +32,9 @@ function SignUp() {
     const signUpClick = async () => {
         try {
             const user = { email, password, userData: { fullname } };
-            const data = await signupUser(user);
+            const response = await signupUser(user);
 
-            localStorage.setObject("currentUser", data);
+            localStorage.setObject("currentUser", response.data);
 
             navigate("/notes");
         } catch (e) {

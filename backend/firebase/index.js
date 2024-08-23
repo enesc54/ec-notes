@@ -1,6 +1,7 @@
 var { initializeApp } = require("firebase/app");
 var { getAuth } = require("firebase/auth");
 var { getFirestore } = require("firebase/firestore");
+const { setDoc, doc, getDoc, collection } = require("firebase/firestore");
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,

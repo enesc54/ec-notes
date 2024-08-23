@@ -15,6 +15,7 @@ function AppRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route path='/'>
+                  <Route index element={<Navigate to="/auth/login" replace/>}/>
                     <Route path='/auth' element={<AuthLayout />}>
                         <Route
                             index
