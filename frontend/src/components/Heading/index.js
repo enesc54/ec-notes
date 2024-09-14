@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function Heading(props) {
     const { type } = props;
     const [fontSize, setFontSize] = useState();
-    const [value, setValue] = useState("");
+
     useEffect(() => {
         switch (type) {
             case "h1":
@@ -31,11 +31,17 @@ function Heading(props) {
     }, [type]);
     return (
         <DynamicTextArea
-            value={value}
-            setValue={setValue}
+            value={props.value}
+            setValue={props.onContentChange}
+            placeholder={props.placeholder || "Untitled"}
             style={{
                 bold: true,
                 fontSize: fontSize
+            }}
+            onChange={e => {
+                if (props.onContentChange) {
+                    props.onContentChange(e.target.value);
+                }
             }}
         />
     );

@@ -1,6 +1,7 @@
 import LeftMenuItem from "components/LeftMenuItem";
 import Dropdown from "components/Dropdown";
 import NoteViewer from "components/NoteViewer";
+import ToolBar from "components/ToolBar";
 
 import { useState, useEffect } from "react";
 
@@ -63,9 +64,14 @@ function Notes() {
                     </div>
                 </div>
             </div>
-            <div className='col-span-9 h-full grid justify-items-center'>
-                <div className='w-[90%] rounded-2xl bg-[#1E1F20] flex flex-col p-10 m-10 shadow-2xl h-[calc(100dvh-80px)] justify-start'>
-                    <NoteViewer noteId={activeNote} />
+            <div className='col-span-9 h-full grid justify-items-center grid grid-rows-12'>
+                <div className='w-[90%] rounded-2xl bg-[#1E1F20] flex flex-col p-10 m-10 mb-2 shadow-2xl justify-start text-white row-span-11'>
+                    {activeNote !== "" ? (
+                        <NoteViewer noteId={activeNote} />
+                    ) : null}
+                </div>
+                <div className='w-[90%] p-8 mb-10 row-span-1 bg-[#1E1F20] rounded-2xl'>
+                    <ToolBar />
                 </div>
             </div>
         </div>

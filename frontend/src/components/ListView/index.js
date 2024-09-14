@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 function ListView(props) {
-    const Item = props.item;
+    const { item: Item, onContentChange } = props;
     const [data, setData] = useState(props.data);
     const itemRefs = useRef([]);
     const [focusedId, setFocusedId] = useState();
@@ -11,7 +11,7 @@ function ListView(props) {
         if (itemRefs.current[id]) {
             itemRefs.current[id].focus();
         }
-    }, [data]);
+    }, [focusedId]);
 
     const addItem = () => {
         const id = data?.length;
@@ -26,12 +26,29 @@ function ListView(props) {
         setFocusedId(id - 1);
     };
 
+    const itemContentChange = (id, newContent) => {
+        const updatedData = [...data];
+        if (updatedData[id]) {
+            updatedData[id].content = newContent;
+        }
+
+        setData(updatedData);
+    };
+
+    useEffect(() => {
+        onContentChange(data);
+    }, [data, onContentChange]);
+
     return (
         <div>
-            {data.map(item => (
+            {data.map((item, index) => (
                 <Item
-                    ref={el => (itemRefs.current[item.id] = el)}
-                    data={item}
+                    ref={el => (itemRefs.current[index] = el)}
+                    id={index}
+                    data={item?.content}
+                    onContentChange={newContent =>
+                        itemContentChange(index, newContent)
+                    }
                     addItem={addItem}
                     deleteItem={deleteItem}
                 />

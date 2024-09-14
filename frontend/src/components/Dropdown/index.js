@@ -29,7 +29,7 @@ function Dropdown(props) {
                     setIsOpen(!isOpen);
                 }}
             >
-                <CiMenuKebab className='h-full' />
+                <CiMenuKebab className='h-full text-white' />
             </button>
 
             {isOpen && (

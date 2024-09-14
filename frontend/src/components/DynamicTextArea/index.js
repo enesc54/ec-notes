@@ -30,6 +30,7 @@ function DynamicTextArea(props, ref) {
     const handleChange = e => {
         setValue(e.target.value);
         resizeTextarea();
+        props.onChange(e);
     };
 
     const resizeTextarea = () => {

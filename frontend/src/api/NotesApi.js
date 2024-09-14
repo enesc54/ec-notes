@@ -1,4 +1,4 @@
-import { get } from "./api";
+import { get, post } from "./api";
 
 const getAllNotes = userId => {
     const response = get(`/notes/getAllNotes/${userId}`);
@@ -9,4 +9,8 @@ const getNote = (userId, noteId) => {
     return get(`/notes/getNote/${userId}&${noteId}`);
 };
 
-export { getAllNotes, getNote };
+const saveNote = (userId, noteId, noteData) => {
+    return post(`/notes/saveNote/${userId}&${noteId}`, noteData);
+};
+
+export { getAllNotes, getNote, saveNote };

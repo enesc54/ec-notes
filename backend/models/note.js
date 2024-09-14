@@ -4,7 +4,8 @@ const {
     doc,
     getDocs,
     getDoc,
-    collection
+    collection,
+    updateDoc
 } = require("firebase/firestore");
 
 const ApiError = require("../utils/error");
@@ -46,7 +47,17 @@ class Note {
 
             return result;
         } catch (e) {
-            console.log(e);
+            const error = new ApiError("İstek Başarısız...", 400);
+            throw error;
+        }
+    }
+
+    async saveNote(userId, noteId, noteData) {
+        try {
+            const noteRef = doc(this.db, "users", userId, "notes", noteId);
+
+            await updateDoc(noteRef, noteData);
+        } catch (e) {
             const error = new ApiError("İstek Başarısız...", 400);
             throw error;
         }
